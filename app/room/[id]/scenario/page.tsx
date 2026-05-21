@@ -1,7 +1,8 @@
 import { redirect, notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import { getRoom, getScenarioContent } from "@/lib/rooms";
+import { getRoom } from "@/lib/rooms";
 import { getRoomData } from "@/lib/storage";
+import { getContent, type ContentKey } from "@/lib/content";
 import { PageShell } from "@/components/PageShell";
 import Link from "next/link";
 
@@ -19,7 +20,7 @@ export default async function ScenarioPage({
     redirect(`/room/${id}`);
   }
 
-  const scenarioContent = getScenarioContent(room.scenarioId);
+  const scenarioContent = await getContent(`scenario-${room.scenarioId}` as ContentKey);
 
   return (
     <PageShell step={2} title={`Scenario ${room.scenarioId} — Your Outcome`}>
