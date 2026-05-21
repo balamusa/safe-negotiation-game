@@ -1,7 +1,8 @@
 import { redirect, notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
-import { getRoom, getAllScenarioContents, SCENARIO_IDS } from "@/lib/rooms";
+import { getRoom, SCENARIO_IDS } from "@/lib/rooms";
 import { getRoomData } from "@/lib/storage";
+import { getContent, type ContentKey } from "@/lib/content";
 import { PageShell } from "@/components/PageShell";
 
 export default async function CompletePage({
@@ -18,7 +19,14 @@ export default async function CompletePage({
     redirect(`/room/${id}/ownership`);
   }
 
-  const allScenarios = getAllScenarioContents();
+  const allScenarios = Object.fromEntries(
+    await Promise.all(
+      SCENARIO_IDS.map(async (sid) => [
+        sid,
+        await getContent(`scenario-${sid}` as ContentKey),
+      ])
+    )
+  );
 
   const scenarioColors: Record<string, string> = {
     A: "border-green-200 bg-green-50",
