@@ -1,8 +1,6 @@
-# MedNova SAFE Negotiation Game
+# Aspire SAFE Negotiation Game
 
 A web application supporting a live SAFE (Simple Agreement for Future Equity) negotiation activity for startup cohorts. Designed to run over Zoom breakout rooms, it guides participant groups through negotiating SAFE terms, receiving a scenario outcome, calculating equity ownership, and comparing results across all groups.
-
-**Live site:** [https://safe.patrickbeattie.com](https://safe.patrickbeattie.com)
 
 ---
 
@@ -12,7 +10,7 @@ Seven breakout rooms, each containing a startup team and a mentor investor, work
 
 1. **Select your room** — Each group navigates to their assigned room on the home page.
 2. **Negotiate SAFE terms** — Groups verbally agree on a Discount Rate, Valuation Cap, and Investment Amount, then submit those terms.
-3. **Receive your scenario** — Each room is pre-assigned one of four Series A outcome scenarios (A–D) for the fictional company MedNova. The scenario reveals the actual Series A valuation.
+3. **Receive your scenario** — Each room is pre-assigned one of four Series A outcome scenarios (A–D) for a fictional company. The scenario reveals the actual Series A valuation.
 4. **Calculate ownership** — Using the Y Combinator SAFE calculator, groups determine the post-money equity split between Founders, SAFE Holders, and new Series A investors.
 5. **Submit ownership percentages** — Groups enter their calculated Founder %, SAFE Holder %, and New Investor % into the app.
 6. **Compare all scenarios** — The completion page shows the group's own results alongside all four possible scenarios, prompting reflection on how different negotiated terms would have played out under each outcome.
