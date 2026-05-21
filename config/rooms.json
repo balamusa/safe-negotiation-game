@@ -1,0 +1,37 @@
+[
+  {
+    "id": "room-1",
+    "name": "Rise Reforming/LiBAMA Power Corporation/C.J. Whelan/Domineca Neal",
+    "scenarioId": "A"
+  },
+  {
+    "id": "room-2",
+    "name": "PHAXTEC/eSki/Ellington Ellis/Anne Maghas",
+    "scenarioId": "A"
+  },
+  {
+    "id": "room-3",
+    "name": "KP Labs/Loop CO2/Terri Jordan/Shaima Sharif",
+    "scenarioId": "B"
+  },
+  {
+    "id": "room-4",
+    "name": "New Gas and Oil/Encore CO2/Nassir Patel/Dave McCarthy",
+    "scenarioId": "B"
+  },
+  {
+    "id": "room-5",
+    "name": "Varada Agriculture/Bootbox/Brian Kerns/Andrea Course",
+    "scenarioId": "C"
+  },
+  {
+    "id": "room-6",
+    "name": "Novo Blades/Distributed Materials/Tricia Compas-Markman/Andrew Granatstein",
+    "scenarioId": "C"
+  },
+  {
+    "id": "room-7",
+    "name": "Zernike Precision Optics/Impetra Metals/HeatFlow/Sheila Narayan/Deb Kemper/DC Palter",
+    "scenarioId": "D"
+  }
+]

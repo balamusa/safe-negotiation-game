@@ -1,0 +1,2 @@
+# Delays and Market Downturn
+MedNova makes steady progress but falls slightly behind schedule in achieving its milestones. While results remain encouraging, the timing coincides with a dramatic cooling of the investment market as the AI bubble bursts. Capital becomes scarce, and even strong companies struggle to attract funding. MedNova ultimately secures a round, but only by accepting a steep discount. MedNova raises a Series A at a $5M pre‑money valuation.

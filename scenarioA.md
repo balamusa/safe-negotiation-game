@@ -1,0 +1,2 @@
+# Strong Clinical Results, Stable Market
+MedNova’s clinical trials deliver positive results, validating both the accuracy and usability of their diagnostic device. The company demonstrates strong traction with hospital partners and builds investor confidence in its regulatory pathway. Although the broader investment market cools slightly, healthcare innovation remains attractive, and MedNova is able to leverage its momentum. MedNova raises a Series A at a $11M pre‑money valuation. 
