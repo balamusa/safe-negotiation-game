@@ -42,3 +42,8 @@ next-env.d.ts
 
 # session data
 /data/submissions.json
+/data/content.json
+
+# local Claude context
+.claude/
+CLAUDE.md
