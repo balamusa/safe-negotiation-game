@@ -20,15 +20,15 @@ type Submissions = Record<string, RoomSubmission>;
 // ── Helpers ─────────────────────────────────────────────────────────────────
 
 const useRedis = !!(
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+  process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN
 );
 
 function getRedis() {
   // Lazy import so the package isn't touched in dev
   const { Redis } = require("@upstash/redis");
   return new Redis({
-    url: process.env.UPSTASH_REDIS_REST_URL,
-    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+    url: process.env.KV_REST_API_URL,
+    token: process.env.KV_REST_API_TOKEN,
   });
 }
 
