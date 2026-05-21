@@ -13,7 +13,7 @@ export default async function CompletePage({
   const room = getRoom(id);
   if (!room) notFound();
 
-  const submission = getRoomData(id);
+  const submission = await getRoomData(id);
   if (submission.founderPct == null) {
     redirect(`/room/${id}/ownership`);
   }

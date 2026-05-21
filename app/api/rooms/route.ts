@@ -4,7 +4,7 @@ import { getAllData } from "@/lib/storage";
 
 export async function GET() {
   const rooms = getRooms();
-  const allData = getAllData();
+  const allData = await getAllData(rooms.map((r) => r.id));
 
   const result = rooms.map((room) => ({
     ...room,

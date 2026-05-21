@@ -12,7 +12,7 @@ export async function GET(
     return NextResponse.json({ error: "Room not found." }, { status: 404 });
   }
 
-  const data = getRoomData(id);
+  const data = await getRoomData(id);
   return NextResponse.json(
     { ...room, ...data },
     { headers: { "Cache-Control": "no-store" } }

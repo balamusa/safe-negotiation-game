@@ -14,7 +14,7 @@ export default async function ScenarioPage({
   const room = getRoom(id);
   if (!room) notFound();
 
-  const submission = getRoomData(id);
+  const submission = await getRoomData(id);
   if (submission.discountRate == null) {
     redirect(`/room/${id}`);
   }

@@ -12,8 +12,7 @@ export async function POST(
     return NextResponse.json({ error: "Room not found." }, { status: 404 });
   }
 
-  // Must have submitted negotiation first
-  const existing = getRoomData(id);
+  const existing = await getRoomData(id);
   if (existing.discountRate == null) {
     return NextResponse.json(
       { error: "Negotiation terms must be submitted first." },
@@ -60,6 +59,6 @@ export async function POST(
     );
   }
 
-  updateRoomData(id, { founderPct, safeHolderPct, newInvestorPct });
+  await updateRoomData(id, { founderPct, safeHolderPct, newInvestorPct });
   return NextResponse.json({ ok: true });
 }

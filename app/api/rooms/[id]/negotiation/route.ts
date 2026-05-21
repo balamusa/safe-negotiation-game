@@ -39,6 +39,6 @@ export async function POST(
     );
   }
 
-  updateRoomData(id, { discountRate, valuationCap });
+  await updateRoomData(id, { discountRate, valuationCap });
   return NextResponse.json({ ok: true });
 }
