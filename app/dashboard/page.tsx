@@ -129,6 +129,17 @@ export default function DashboardPage() {
                 <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden overflow-x-auto">
                   <table className="w-full text-sm min-w-[640px]">
                     <thead>
+                      {/* Group label row */}
+                      <tr className="bg-gray-50 border-b border-gray-100">
+                        <th colSpan={4} className="px-5 py-2" />
+                        <th
+                          colSpan={3}
+                          className="px-4 py-2 text-center text-xs font-semibold uppercase tracking-wide text-indigo-500 border-l-2 border-gray-200"
+                        >
+                          Equity Ownership %
+                        </th>
+                      </tr>
+                      {/* Column header row */}
                       <tr className="border-b border-gray-100 bg-gray-50">
                         <th className="text-left px-5 py-3 font-semibold text-gray-500">
                           Room
@@ -142,7 +153,7 @@ export default function DashboardPage() {
                         <th className="text-center px-4 py-3 font-semibold text-gray-500">
                           Investment
                         </th>
-                        <th className="text-center px-4 py-3 font-semibold text-gray-500">
+                        <th className="text-center px-4 py-3 font-semibold text-gray-500 border-l-2 border-gray-200">
                           Founders
                         </th>
                         <th className="text-center px-4 py-3 font-semibold text-gray-500">
@@ -183,7 +194,7 @@ export default function DashboardPage() {
                           <td className="px-4 py-4 text-center">
                             <Cell value={fmtCap(room.investmentAmount) === "—" ? undefined : fmtCap(room.investmentAmount)} />
                           </td>
-                          <td className="px-4 py-4 text-center">
+                          <td className="px-4 py-4 text-center border-l-2 border-gray-200">
                             <Cell
                               value={
                                 room.founderPct != null
