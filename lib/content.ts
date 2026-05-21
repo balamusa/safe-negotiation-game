@@ -23,13 +23,9 @@ export const CONTENT_KEYS = [
 
 export type ContentKey = (typeof CONTENT_KEYS)[number];
 
-const DEFAULT_PATHS: Record<ContentKey, string> = {
+const DEFAULT_PATHS: Partial<Record<ContentKey, string>> = {
   mentor: "content/mentor.md",
   startup: "content/startup.md",
-  "scenario-A": "content/scenarios/scenario-A.md",
-  "scenario-B": "content/scenarios/scenario-B.md",
-  "scenario-C": "content/scenarios/scenario-C.md",
-  "scenario-D": "content/scenarios/scenario-D.md",
 };
 
 function readDefault(key: ContentKey): string {
