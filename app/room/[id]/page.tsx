@@ -11,12 +11,14 @@ export default function NegotiationPage() {
 
   const [discountRate, setDiscountRate] = useState("");
   const [valuationCap, setValuationCap] = useState("");
+  const [investmentAmount, setInvestmentAmount] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [submitted, setSubmitted] = useState<{
     discountRate: number;
     valuationCap: number;
+    investmentAmount: number;
   } | null>(null);
   const [roomName, setRoomName] = useState("");
 
@@ -25,11 +27,16 @@ export default function NegotiationPage() {
       .then((r) => r.json())
       .then((data) => {
         setRoomName(data.name ?? "");
-        if (data.discountRate != null && data.valuationCap != null) {
+        if (
+          data.discountRate != null &&
+          data.valuationCap != null &&
+          data.investmentAmount != null
+        ) {
           setAlreadySubmitted(true);
           setSubmitted({
             discountRate: data.discountRate,
             valuationCap: data.valuationCap,
+            investmentAmount: data.investmentAmount,
           });
         }
       })
@@ -42,6 +49,7 @@ export default function NegotiationPage() {
 
     const dr = parseFloat(discountRate);
     const vc = parseFloat(valuationCap.replace(/,/g, ""));
+    const ia = parseFloat(investmentAmount.replace(/,/g, ""));
 
     if (isNaN(dr) || dr <= 0 || dr > 100) {
       setError("Please enter a valid discount rate between 0 and 100.");
@@ -51,13 +59,17 @@ export default function NegotiationPage() {
       setError("Please enter a valid valuation cap greater than 0.");
       return;
     }
+    if (isNaN(ia) || ia <= 0) {
+      setError("Please enter a valid investment amount greater than 0.");
+      return;
+    }
 
     setSubmitting(true);
     try {
       const res = await fetch(`/api/rooms/${roomId}/negotiation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ discountRate: dr, valuationCap: vc }),
+        body: JSON.stringify({ discountRate: dr, valuationCap: vc, investmentAmount: ia }),
       });
 
       if (!res.ok) {
@@ -91,6 +103,12 @@ export default function NegotiationPage() {
             <span className="text-gray-600">Valuation Cap</span>
             <span className="font-semibold text-gray-800">
               ${submitted.valuationCap.toLocaleString()}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-gray-600">SAFE Investment Amount</span>
+            <span className="font-semibold text-gray-800">
+              ${submitted.investmentAmount.toLocaleString()}
             </span>
           </div>
         </div>
@@ -153,6 +171,27 @@ export default function NegotiationPage() {
           {valuationCap && !isNaN(parseFloat(valuationCap)) && (
             <p className="text-xs text-gray-400 mt-1">
               = ${parseFloat(valuationCap).toLocaleString()}
+            </p>
+          )}
+        </div>
+
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            SAFE Investment Amount ($)
+          </label>
+          <input
+            type="number"
+            min="0"
+            step="1000"
+            value={investmentAmount}
+            onChange={(e) => setInvestmentAmount(e.target.value)}
+            placeholder="e.g. 1000000"
+            className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            required
+          />
+          {investmentAmount && !isNaN(parseFloat(investmentAmount)) && (
+            <p className="text-xs text-gray-400 mt-1">
+              = ${parseFloat(investmentAmount).toLocaleString()}
             </p>
           )}
         </div>

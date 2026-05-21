@@ -19,7 +19,7 @@ export async function POST(
     return NextResponse.json({ error: "Invalid JSON." }, { status: 400 });
   }
 
-  const { discountRate, valuationCap } = body as Record<string, unknown>;
+  const { discountRate, valuationCap, investmentAmount } = body as Record<string, unknown>;
 
   if (
     typeof discountRate !== "number" ||
@@ -39,6 +39,13 @@ export async function POST(
     );
   }
 
-  await updateRoomData(id, { discountRate, valuationCap });
+  if (typeof investmentAmount !== "number" || investmentAmount <= 0) {
+    return NextResponse.json(
+      { error: "Investment amount must be a positive number." },
+      { status: 400 }
+    );
+  }
+
+  await updateRoomData(id, { discountRate, valuationCap, investmentAmount });
   return NextResponse.json({ ok: true });
 }

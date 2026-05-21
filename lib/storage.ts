@@ -10,6 +10,7 @@ import path from "path";
 export type RoomSubmission = {
   discountRate?: number;
   valuationCap?: number;
+  investmentAmount?: number;
   founderPct?: number;
   safeHolderPct?: number;
   newInvestorPct?: number;

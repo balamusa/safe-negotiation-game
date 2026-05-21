@@ -44,6 +44,10 @@ export default async function CompletePage({
             label="Valuation Cap"
             value={`$${submission.valuationCap?.toLocaleString()}`}
           />
+          <Stat
+            label="SAFE Investment"
+            value={`$${submission.investmentAmount?.toLocaleString()}`}
+          />
           <Stat label="Founders" value={`${submission.founderPct}%`} />
           <Stat
             label="SAFE Holders"

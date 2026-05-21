@@ -8,6 +8,7 @@ type RoomData = {
   scenarioId: string;
   discountRate?: number;
   valuationCap?: number;
+  investmentAmount?: number;
   founderPct?: number;
   safeHolderPct?: number;
   newInvestorPct?: number;
@@ -139,6 +140,9 @@ export default function DashboardPage() {
                           Valuation Cap
                         </th>
                         <th className="text-center px-4 py-3 font-semibold text-gray-500">
+                          Investment
+                        </th>
+                        <th className="text-center px-4 py-3 font-semibold text-gray-500">
                           Founders
                         </th>
                         <th className="text-center px-4 py-3 font-semibold text-gray-500">
@@ -175,6 +179,9 @@ export default function DashboardPage() {
                           </td>
                           <td className="px-4 py-4 text-center">
                             <Cell value={fmtCap(room.valuationCap) === "—" ? undefined : fmtCap(room.valuationCap)} />
+                          </td>
+                          <td className="px-4 py-4 text-center">
+                            <Cell value={fmtCap(room.investmentAmount) === "—" ? undefined : fmtCap(room.investmentAmount)} />
                           </td>
                           <td className="px-4 py-4 text-center">
                             <Cell

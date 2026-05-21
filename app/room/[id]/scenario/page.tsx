@@ -43,7 +43,8 @@ export default async function ScenarioPage({
         <p className="text-sm text-gray-500 mb-3">
           Using your negotiated terms (
           <strong>{submission.discountRate}% discount</strong>,{" "}
-          <strong>${submission.valuationCap?.toLocaleString()} cap</strong>) and
+          <strong>${submission.valuationCap?.toLocaleString()} cap</strong>,{" "}
+          <strong>${submission.investmentAmount?.toLocaleString()} invested</strong>) and
           the Series A valuation in your scenario, use the SAFE calculator to
           determine the ownership percentage for:
         </p>
