@@ -54,7 +54,7 @@ export default async function ScenarioPage({
           <li>New Series A investors</li>
         </ul>
         <a
-          href="https://www.equidam.com/safe-calculator/"
+          href="https://v0-y-combinator-calculator.vercel.app/"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block bg-white border border-blue-300 text-blue-600 font-semibold px-5 py-2.5 rounded-xl hover:bg-blue-50 transition-colors text-sm"
