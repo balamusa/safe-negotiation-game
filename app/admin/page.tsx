@@ -15,12 +15,12 @@ const SECTIONS: { key: ContentKey; label: string; description: string }[] = [
   {
     key: "mentor",
     label: "Mentor Brief",
-    description: "Shown at /mentor",
+    description: "Shown at /capital",
   },
   {
     key: "startup",
     label: "Startup Brief",
-    description: "Shown at /startup",
+    description: "Shown at /founders",
   },
   {
     key: "scenario-A",
@@ -270,18 +270,18 @@ export default function AdminPage() {
           </div>
           <div className="flex gap-2">
             <a
-              href="/mentor"
+              href="/capital"
               target="_blank"
               className="text-sm px-3 py-2 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-gray-600 transition-colors"
             >
-              /mentor ↗
+              /capital ↗
             </a>
             <a
-              href="/startup"
+              href="/founders"
               target="_blank"
               className="text-sm px-3 py-2 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-gray-600 transition-colors"
             >
-              /startup ↗
+              /founders ↗
             </a>
             <button
               onClick={() => {
