@@ -1,2 +1,0 @@
-# Milestones Missed, Market Froth
-MedNova encounters higher‑than‑expected costs, causing delays in hitting certain milestones. Despite these setbacks, investor enthusiasm for AI‑driven healthcare solutions is at a peak, and capital is flowing aggressively into the sector. MedNova benefits from this frothy environment, securing interest from multiple funds eager to gain exposure to the space. MedNova raises a Series A at a $14M pre‑money valuation. 

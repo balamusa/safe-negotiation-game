@@ -8,7 +8,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "MedNova SAFE Negotiation",
+  title: "Aspire SAFE Negotiation Activity",
   description: "SAFE agreement negotiation activity",
 };
 

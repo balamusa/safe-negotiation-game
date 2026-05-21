@@ -89,7 +89,7 @@ export default function DashboardPage() {
               Game Master Dashboard
             </h1>
             <p className="text-sm text-gray-400 mt-1">
-              MedNova SAFE Negotiation Activity
+              Aspire SAFE Negotiation Activity
             </p>
           </div>
           <div className="flex items-center gap-3">

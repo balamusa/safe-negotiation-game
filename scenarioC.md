@@ -1,2 +1,0 @@
-# Clinical Setbacks, Redesign Required
-MedNova’s clinical trials reveal shortcomings in the current device design, forcing the team to revisit core technical assumptions. While the company still shows promise, investors recognize that significant time and capital will be required before the product is market‑ready. This added risk weighs heavily on negotiations, reducing the company’s leverage. MedNova raises a Series A at a $6M pre‑money valuation. 

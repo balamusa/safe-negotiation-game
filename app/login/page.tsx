@@ -43,7 +43,7 @@ function LoginForm() {
       <div className="max-w-2xl mx-auto">
         <div className="mb-6 text-center">
           <h1 className="text-2xl font-bold text-gray-800">
-            MedNova SAFE Negotiation
+            Aspire SAFE Negotiation
           </h1>
         </div>
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">

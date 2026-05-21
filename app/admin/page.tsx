@@ -79,7 +79,7 @@ function PasswordGate({ onAuth }: { onAuth: (pw: string) => void }) {
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 w-full max-w-sm">
         <h1 className="text-xl font-bold text-gray-800 mb-1">Admin Panel</h1>
         <p className="text-sm text-gray-400 mb-6">
-          MedNova SAFE Negotiation — Content Editor
+          Aspire SAFE Negotiation — Content Editor
         </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -265,7 +265,7 @@ export default function AdminPage() {
           <div>
             <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
             <p className="text-sm text-gray-400 mt-1">
-              MedNova SAFE Negotiation — Content Editor
+              Aspire SAFE Negotiation — Content Editor
             </p>
           </div>
           <div className="flex gap-2">
