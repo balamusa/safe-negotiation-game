@@ -15,10 +15,10 @@ type RoomData = {
 };
 
 const SCENARIO_LABELS: Record<string, string> = {
-  A: "Scenario A — Strong Clinical Results, Stable Market ($11M)",
-  B: "Scenario B — Milestones Missed, Market Froth ($14M)",
-  C: "Scenario C — Clinical Setbacks, Redesign Required ($6M)",
-  D: "Scenario D — Delays and Market Downturn ($5M)",
+  A: "Scenario A — Strong Pilot Results, Stable Market",
+  B: "Scenario B — Milestones Missed, Market Froth",
+  C: "Scenario C — Technical Setbacks, Redesign Required",
+  D: "Scenario D — Delays and Market Downturn",
 };
 
 const SCENARIO_COLORS: Record<string, string> = {

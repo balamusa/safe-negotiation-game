@@ -25,22 +25,22 @@ const SECTIONS: { key: ContentKey; label: string; description: string }[] = [
   {
     key: "scenario-A",
     label: "Scenario A",
-    description: "Strong clinical results, stable market ($11M)",
+    description: "Strong Pilot Results, Stable Market",
   },
   {
     key: "scenario-B",
     label: "Scenario B",
-    description: "Milestones missed, market froth ($14M)",
+    description: "Milestones Missed, Market Froth",
   },
   {
     key: "scenario-C",
     label: "Scenario C",
-    description: "Clinical setbacks, redesign required ($6M)",
+    description: "Technical Setbacks, Redesign Required",
   },
   {
     key: "scenario-D",
     label: "Scenario D",
-    description: "Delays and market downturn ($5M)",
+    description: "Delays and Market Downturn",
   },
 ];
 
