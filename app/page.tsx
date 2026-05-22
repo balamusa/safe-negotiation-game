@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { getRooms } from "@/lib/rooms";
+import { getAllRoomNames } from "@/lib/roomNames";
 import { PageShell } from "@/components/PageShell";
 
-export default function HomePage() {
+export default async function HomePage() {
   const rooms = getRooms();
+  const names = await getAllRoomNames(rooms);
 
   return (
     <PageShell step={0} title="Select Your Breakout Room">
@@ -18,7 +20,7 @@ export default function HomePage() {
               href={`/room/${room.id}`}
               className="block w-full text-left px-5 py-4 rounded-xl border border-gray-200 bg-gray-50 hover:bg-blue-50 hover:border-blue-300 transition-colors text-gray-700 font-medium leading-snug"
             >
-              {room.name}
+              {names[room.id]}
             </Link>
           </li>
         ))}

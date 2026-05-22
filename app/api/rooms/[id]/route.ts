@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRoom } from "@/lib/rooms";
 import { getRoomData } from "@/lib/storage";
+import { getRoomName } from "@/lib/roomNames";
 
 export async function GET(
   _request: NextRequest,
@@ -12,9 +13,13 @@ export async function GET(
     return NextResponse.json({ error: "Room not found." }, { status: 404 });
   }
 
-  const data = await getRoomData(id);
+  const [data, name] = await Promise.all([
+    getRoomData(id),
+    getRoomName(id, room.name),
+  ]);
+
   return NextResponse.json(
-    { ...room, ...data },
+    { ...room, name, ...data },
     { headers: { "Cache-Control": "no-store" } }
   );
 }

@@ -44,6 +44,101 @@ const SECTIONS: { key: ContentKey; label: string; description: string }[] = [
   },
 ];
 
+type RoomEntry = { id: string; name: string; scenarioId: string };
+
+// ── Room names editor ─────────────────────────────────────────────────────────
+
+function RoomNamesEditor({ password }: { password: string }) {
+  const [rooms, setRooms] = useState<RoomEntry[]>([]);
+  const [names, setNames] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState<Record<string, boolean>>({});
+  const [saved, setSaved] = useState<Record<string, boolean>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    fetch("/api/admin/rooms")
+      .then((r) => r.json())
+      .then((data: RoomEntry[]) => {
+        setRooms(data);
+        setNames(Object.fromEntries(data.map((r) => [r.id, r.name])));
+      })
+      .catch(() => {});
+  }, []);
+
+  async function handleSave(id: string) {
+    setSaving((s) => ({ ...s, [id]: true }));
+    setSaved((s) => ({ ...s, [id]: false }));
+    setErrors((e) => ({ ...e, [id]: "" }));
+    try {
+      const res = await fetch("/api/admin/rooms", {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-password": password,
+        },
+        body: JSON.stringify({ id, name: names[id] }),
+      });
+      if (res.ok) {
+        setSaved((s) => ({ ...s, [id]: true }));
+        setTimeout(() => setSaved((s) => ({ ...s, [id]: false })), 3000);
+      } else {
+        const body = await res.json();
+        setErrors((e) => ({ ...e, [id]: body.error ?? "Save failed." }));
+      }
+    } catch {
+      setErrors((e) => ({ ...e, [id]: "Network error. Please try again." }));
+    } finally {
+      setSaving((s) => ({ ...s, [id]: false }));
+    }
+  }
+
+  if (rooms.length === 0) {
+    return (
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center text-gray-400 text-sm">
+        Loading rooms…
+      </div>
+    );
+  }
+
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+      <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
+        <h2 className="text-base font-semibold text-gray-800">Room Names</h2>
+        <p className="text-xs text-gray-400 mt-0.5">
+          Names shown on the room selection page and throughout the activity
+        </p>
+      </div>
+      <div className="divide-y divide-gray-50">
+        {rooms.map((room) => (
+          <div key={room.id} className="flex items-center gap-3 px-6 py-4">
+            <span className="text-xs font-semibold text-gray-400 w-24 shrink-0">
+              Scenario {room.scenarioId}
+            </span>
+            <input
+              type="text"
+              value={names[room.id] ?? ""}
+              onChange={(e) =>
+                setNames((n) => ({ ...n, [room.id]: e.target.value }))
+              }
+              className="flex-1 border border-gray-300 rounded-xl px-4 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+            />
+            <button
+              onClick={() => handleSave(room.id)}
+              disabled={saving[room.id]}
+              className="text-sm px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
+            >
+              {saving[room.id] ? "Saving…" : saved[room.id] ? "✓ Saved" : "Save"}
+            </button>
+            {errors[room.id] && (
+              <p className="text-red-500 text-xs">{errors[room.id]}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 // ── Password gate ─────────────────────────────────────────────────────────────
 
 function PasswordGate({ onAuth }: { onAuth: (pw: string) => void }) {
@@ -311,6 +406,7 @@ export default function AdminPage() {
 
         {content ? (
           <div className="space-y-6">
+            <RoomNamesEditor password={password} />
             {SECTIONS.map((section) => (
               <EditorSection
                 key={section.key}

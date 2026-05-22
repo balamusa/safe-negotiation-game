@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { getRoom, SCENARIO_IDS } from "@/lib/rooms";
 import { getRoomData } from "@/lib/storage";
 import { getContent, type ContentKey } from "@/lib/content";
+import { getRoomName } from "@/lib/roomNames";
 import { PageShell } from "@/components/PageShell";
 
 export default async function CompletePage({
@@ -19,14 +20,15 @@ export default async function CompletePage({
     redirect(`/room/${id}/ownership`);
   }
 
-  const allScenarios = Object.fromEntries(
-    await Promise.all(
+  const [allScenarios, roomName] = await Promise.all([
+    Promise.all(
       SCENARIO_IDS.map(async (sid) => [
         sid,
         await getContent(`scenario-${sid}` as ContentKey),
       ])
-    )
-  );
+    ).then(Object.fromEntries),
+    getRoomName(id, room.name),
+  ]);
 
   const scenarioColors: Record<string, string> = {
     A: "border-green-200 bg-green-50",
@@ -38,7 +40,7 @@ export default async function CompletePage({
   return (
     <PageShell step={4} title="Activity Complete!">
       <p className="text-sm text-blue-600 font-medium mb-5 bg-blue-50 px-4 py-2 rounded-lg">
-        Room: {room.name}
+        Room: {roomName}
       </p>
 
       {/* Results summary */}

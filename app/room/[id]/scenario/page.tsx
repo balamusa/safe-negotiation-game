@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { getRoom } from "@/lib/rooms";
 import { getRoomData } from "@/lib/storage";
 import { getContent, type ContentKey } from "@/lib/content";
+import { getRoomName } from "@/lib/roomNames";
 import { PageShell } from "@/components/PageShell";
 import Link from "next/link";
 
@@ -20,12 +21,15 @@ export default async function ScenarioPage({
     redirect(`/room/${id}`);
   }
 
-  const scenarioContent = await getContent(`scenario-${room.scenarioId}` as ContentKey);
+  const [scenarioContent, roomName] = await Promise.all([
+    getContent(`scenario-${room.scenarioId}` as ContentKey),
+    getRoomName(id, room.name),
+  ]);
 
   return (
     <PageShell step={2} title={`Scenario ${room.scenarioId} — Your Outcome`}>
       <p className="text-sm text-blue-600 font-medium mb-5 bg-blue-50 px-4 py-2 rounded-lg">
-        Room: {room.name}
+        Room: {roomName}
       </p>
 
       <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-6">
