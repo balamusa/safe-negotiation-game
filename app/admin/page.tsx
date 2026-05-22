@@ -51,9 +51,9 @@ type RoomEntry = { id: string; name: string; scenarioId: string };
 function RoomNamesEditor({ password }: { password: string }) {
   const [rooms, setRooms] = useState<RoomEntry[]>([]);
   const [names, setNames] = useState<Record<string, string>>({});
-  const [saving, setSaving] = useState<Record<string, boolean>>({});
-  const [saved, setSaved] = useState<Record<string, boolean>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     fetch("/api/admin/rooms")
@@ -65,30 +65,31 @@ function RoomNamesEditor({ password }: { password: string }) {
       .catch(() => {});
   }, []);
 
-  async function handleSave(id: string) {
-    setSaving((s) => ({ ...s, [id]: true }));
-    setSaved((s) => ({ ...s, [id]: false }));
-    setErrors((e) => ({ ...e, [id]: "" }));
+  async function handleSaveAll() {
+    setSaving(true);
+    setSaved(false);
+    setError("");
     try {
-      const res = await fetch("/api/admin/rooms", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          "x-admin-password": password,
-        },
-        body: JSON.stringify({ id, name: names[id] }),
-      });
-      if (res.ok) {
-        setSaved((s) => ({ ...s, [id]: true }));
-        setTimeout(() => setSaved((s) => ({ ...s, [id]: false })), 3000);
-      } else {
-        const body = await res.json();
-        setErrors((e) => ({ ...e, [id]: body.error ?? "Save failed." }));
-      }
+      await Promise.all(
+        rooms.map((room) =>
+          fetch("/api/admin/rooms", {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              "x-admin-password": password,
+            },
+            body: JSON.stringify({ id: room.id, name: names[room.id] }),
+          }).then((res) => {
+            if (!res.ok) throw new Error(`Failed to save ${room.id}`);
+          })
+        )
+      );
+      setSaved(true);
+      setTimeout(() => setSaved(false), 3000);
     } catch {
-      setErrors((e) => ({ ...e, [id]: "Network error. Please try again." }));
+      setError("One or more rooms failed to save. Please try again.");
     } finally {
-      setSaving((s) => ({ ...s, [id]: false }));
+      setSaving(false);
     }
   }
 
@@ -102,11 +103,20 @@ function RoomNamesEditor({ password }: { password: string }) {
 
   return (
     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-      <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
-        <h2 className="text-base font-semibold text-gray-800">Room Names</h2>
-        <p className="text-xs text-gray-400 mt-0.5">
-          Names shown on the room selection page and throughout the activity
-        </p>
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 bg-gray-50">
+        <div>
+          <h2 className="text-base font-semibold text-gray-800">Room Names</h2>
+          <p className="text-xs text-gray-400 mt-0.5">
+            Names shown on the room selection page and throughout the activity
+          </p>
+        </div>
+        <button
+          onClick={handleSaveAll}
+          disabled={saving}
+          className="text-sm px-4 py-1.5 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {saving ? "Saving…" : saved ? "✓ Saved" : "Save All"}
+        </button>
       </div>
       <div className="divide-y divide-gray-50">
         {rooms.map((room) => (
@@ -122,19 +132,14 @@ function RoomNamesEditor({ password }: { password: string }) {
               }
               className="flex-1 border border-gray-300 rounded-xl px-4 py-2 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
             />
-            <button
-              onClick={() => handleSave(room.id)}
-              disabled={saving[room.id]}
-              className="text-sm px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shrink-0"
-            >
-              {saving[room.id] ? "Saving…" : saved[room.id] ? "✓ Saved" : "Save"}
-            </button>
-            {errors[room.id] && (
-              <p className="text-red-500 text-xs">{errors[room.id]}</p>
-            )}
           </div>
         ))}
       </div>
+      {error && (
+        <p className="text-red-600 text-sm bg-red-50 px-6 py-3 border-t border-red-100">
+          {error}
+        </p>
+      )}
     </div>
   );
 }
